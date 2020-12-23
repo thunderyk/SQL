@@ -100,6 +100,27 @@ from employees em,
      (select avg(salary) salary, department_id from employees group by department_id) avem
 where em.department_id = avem.department_id and em.salary > avem.salary;
 
+/*문제8.
+직원 입사일이 11번째에서 15번째의 직원의
+사번, 이름, 급여, 입사일을 입사일 순서로 출력하세요
+*/
+select rem.rn,
+       rem.employee_id,
+       rem.first_name,
+       rem.salary,
+       rem.hire_date
+from (select rownum rn,
+             employee_id,
+             first_name,
+             salary,
+             hire_date
+      from (select employee_id,
+                   first_name,
+                   salary,
+                   hire_date
+            from employees
+            order by hire_date asc)em)rem
+where rem.rn >= 11 and rem.rn <= 15;
 
 
 
