@@ -53,23 +53,24 @@ select man.manager_id,
        first_name,
        man.avg_salary,
        man.max_salary,
-       man.min_salary,
-       hire_date
+       man.min_salary
 from employees em, (select ROUND(avg(salary),0) avg_salary, 
                            max(salary) max_salary, 
                            min(salary) min_salary,
                            manager_id
                     from employees
+                    where hire_date >= '05/1/1'
                     group by manager_id
                     having ROUND(avg(salary),0) >= 5000) man
 where em.employee_id = man.manager_id
-and em.hire_date >= '05/1/1'
 order by man.avg_salary desc;
 /* 결과 2가 나오는데 확인 필요...
    매니저별이면 총 19명 중에서 avg가 5000 이상은 11명
    이중에서 2005년 이후에 입사한 사람이면 2005년을 포함하면
    안되니까 2명이 맞는거 같음 2005년을 포함하면 5명이됨
    어떻게 9명이 나오는 걸까...ㅠ*/
+/*통계대상(직원)이라고 해서 2005년 이후라고 해서 em.employee에 
+  넣었는데 이게 아니라 매니저의 hire_date였음...*/
 
 select ROUND(avg(salary),0) avg_salary, 
                            max(salary) max_salary, 
