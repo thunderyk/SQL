@@ -68,7 +68,8 @@ order by man.avg_salary desc;
 /* 결과 2가 나오는데 확인 필요...
    매니저별이면 총 19명 중에서 avg가 5000 이상은 11명
    이중에서 2005년 이후에 입사한 사람이면 2005년을 포함하면
-   안되니까 2명이 맞는거 같음*/
+   안되니까 2명이 맞는거 같음 2005년을 포함하면 5명이됨
+   어떻게 9명이 나오는 걸까...ㅠ*/
 
 select ROUND(avg(salary),0) avg_salary, 
                            max(salary) max_salary, 
